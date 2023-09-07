@@ -12,8 +12,8 @@ let totalCartPrice = document.querySelector("#totalPrice");
 
 // Affichage des produits qu panier
 myCart.forEach(p => {
-        totalArticle += p.qty;
-        totalPrice += (p.qty * p.price); 
+        totalArticle += Number(p.qty);
+        totalPrice += Number((p.qty * p.price)); 
         cartHTML.innerHTML += `
             <article class="cart__item" data-id="${p.id}" data-color="${p.color}">
                 <div class="cart__item__img">
@@ -51,6 +51,19 @@ inputs.forEach(input => {
         p.qty = input.value;
         console.log(p.qty);
         localStorage.setItem('panier', JSON.stringify(myCart));
+        totalQty.innerHTML = totalArticle;
+        totalCartPrice.innerHTML = totalPrice;
+        location.reload();
+    });
+});
+
+let btnDelete = document.querySelectorAll('.deleteItem');
+btnDelete.forEach(del => {
+    del.addEventListener('click', function(event){
+        let p = myCart.find(p => p.id === del.closest('article').dataset.id);
+        myCart.splice(myCart.indexOf(p), 1);
+        localStorage.setItem('panier', JSON.stringify(myCart));
+        location.reload();
     });
 });
 
