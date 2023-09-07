@@ -46,10 +46,8 @@ totalCartPrice.innerHTML = totalPrice;
 let inputs = document.querySelectorAll('.itemQuantity');
 inputs.forEach(input => {
     input.addEventListener('change', function(event){
-        console.log(input.closest('article').dataset.id);
         let p = myCart.find(p => p.id === input.closest('article').dataset.id);
         p.qty = input.value;
-        console.log(p.qty);
         localStorage.setItem('panier', JSON.stringify(myCart));
         totalQty.innerHTML = totalArticle;
         totalCartPrice.innerHTML = totalPrice;
