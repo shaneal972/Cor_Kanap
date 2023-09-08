@@ -1,4 +1,5 @@
 import { getOneProduct } from "./api.js";
+import { findProductInCart, updateCart } from "./utils.js";
 
 let cartHTML = document.getElementById('cart__items');
 // console.log(cart);
@@ -46,9 +47,9 @@ totalCartPrice.innerHTML = totalPrice;
 let inputs = document.querySelectorAll('.itemQuantity');
 inputs.forEach(input => {
     input.addEventListener('change', function(event){
-        let p = myCart.find(p => p.id === input.closest('article').dataset.id);
+        let p = findProductInCart(input, myCart, 'article');
         p.qty = input.value;
-        localStorage.setItem('panier', JSON.stringify(myCart));
+        updateCart('panier', myCart);
         totalQty.innerHTML = totalArticle;
         totalCartPrice.innerHTML = totalPrice;
         location.reload();
@@ -58,9 +59,9 @@ inputs.forEach(input => {
 let btnDelete = document.querySelectorAll('.deleteItem');
 btnDelete.forEach(del => {
     del.addEventListener('click', function(event){
-        let p = myCart.find(p => p.id === del.closest('article').dataset.id);
+        let p = findProductInCart(del, myCart, 'article');
         myCart.splice(myCart.indexOf(p), 1);
-        localStorage.setItem('panier', JSON.stringify(myCart));
+        updateCart('panier', myCart);
         location.reload();
     });
 });
