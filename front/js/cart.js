@@ -67,4 +67,49 @@ btnDelete.forEach(del => {
 });
 
 
+// Préparation de la commande.
+function getById(id) {
+    return document.getElementById(id);
+}
+
+/*
+* let getById = (id) => document.getElementById(id); //ES6
+*
+*/
+
+let prenom = getById('firstName');
+let nom = getById('lastName');
+let address = getById('address');
+let city = getById('city');
+let email = getById('email');
+let firstNameError = getById('firstNameErrorMsg');
+let lastNameError = getById('lastNameErrorMsg');
+let addressError = getById('addressErrorMsg');
+let cityError = getById('cityErrorMsg');
+let emailError = getById('emailErrorMsg');
+let btnOrder = getById('order');
+
+
+btnOrder.addEventListener('click', (event) => {
+
+    let validate = (element, message, error) => {
+        let valid = false;
+        if(element.value.trim() === "" || element.value.trim().length < 2){
+            valid = false;
+            error.innerHTML = message;
+        }else {
+            error.innerHTML = "";
+            valid = true;
+        }
+
+        
+
+        return valid;
+    };
+
+    validate(prenom, "Le champ prénom ne doit pas être vide et doit avpoir plus de 2 caractères!", firstNameError);
+});
+
+
+
 
