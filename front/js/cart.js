@@ -102,12 +102,58 @@ btnOrder.addEventListener('click', (event) => {
             valid = true;
         }
 
-        
+        if (element.getAttribute("type") === 'email') {
+            let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
+            if (element.value.match(validRegex)) {
+                error.innerHTML = "";
+                valid = true;
+            } else {
+                error.innerHTML = "Votre email n'est pas un email valide, merci de le retaper!";
+                valid = false;
+            }
+        }
+
+        if ((element.getAttribute('id') === 'firstName') || (element.getAttribute('id') === 'lastName')) {
+            if (element.value.match(/^[a-zà-ï- ]+$/gi)) {
+                error.innerHTML = "";
+                valid = true;
+            }else {
+                error.innerHTML = "Ce champ ne doit pas contenir de chiffre, merci de le retaper !";
+                valid = false;
+            }
+        }
         return valid;
     };
 
-    validate(prenom, "Le champ prénom ne doit pas être vide et doit avpoir plus de 2 caractères!", firstNameError);
+    validate(
+        prenom, 
+        "Le champ prénom ne doit pas être vide et doit avoir plus de 2 caractères!", 
+        firstNameError
+    );
+    validate(
+        nom, 
+        "Le champ nom ne doit pas être vide et doit avoir plus de 2 caractères!", 
+        lastNameError
+    );
+    validate(
+        address, 
+        "Le champ adresse ne doit pas être vide et doit avoir plus de 2 caractères!", 
+        addressError
+    );
+    validate(
+        city, 
+        "Le champ city ne doit pas être vide et doit avoir plus de 2 caractères!", 
+        cityError
+    );
+    validate(
+        email, 
+        "Le champ email ne doit pas être vide et doit avoir plus de 2 caractères!", 
+        emailError
+    );
+
+    //Envoie des infos du client et du panier vers l'API en POST
+        
 });
 
 
